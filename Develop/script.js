@@ -7,7 +7,8 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password.join("");
-
+  userSelectedCharacters = []
+  result = []
 }
 
 // Add event listener to generate button
@@ -25,6 +26,8 @@ var lowerCharacters=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 var userSelectedCharacters = []
 // arry that contains the length of the user selected password
 var userLength = ''
+// array that will contain the final result 
+var result = []
 
 // Prompts the user for a password length of 8-128 and validates their response
 function getUserInput(){
@@ -47,22 +50,27 @@ function getUserInput(){
 function chooseCharacterTypes(){
   var hasSpecialCharacters = confirm('Do you want to have special characters in your password')
   if (hasSpecialCharacters === true){
-    userSelectedCharacters = userSelectedCharacters.concat(specialCharacters)
+    userSelectedCharacters =userSelectedCharacters.concat(specialCharacters)
+    result.push(getRandom(specialCharacters))
+    
   } 
 
   var hasNumericCharacters = confirm('Do you want to have numerical characters in your password')
   if (hasNumericCharacters === true){
     userSelectedCharacters =userSelectedCharacters.concat(numericCharacters)
+    result.push(getRandom(numericCharacters))
   }
 
   var hasUpperCaseCharacters = confirm('Do you want to have uppercase characters in your password')
   if (hasUpperCaseCharacters === true){
     userSelectedCharacters = userSelectedCharacters.concat(upperCharacters)
+    result.push(getRandom(upperCharacters))
   }
 
   var hasLowerCaseCharacters = confirm('Do you want to have lowercase characters in your password')
   if (hasLowerCaseCharacters === true){
     userSelectedCharacters = userSelectedCharacters.concat(lowerCharacters)
+    result.push(getRandom(lowerCharacters))
   }
 }
 // Generates a random character from an array
@@ -73,10 +81,9 @@ function getRandom(arr){
 
 // Generates the Password
 function generatePassword(){
-  var result = []
   getUserInput();
   chooseCharacterTypes();
-  for (var i = 0; i < userLength; i++) {
+  for (var i = 0 + result.length; i < userLength; i++) {
     result.push(getRandom(userSelectedCharacters))
   }
   return result
