@@ -34,7 +34,7 @@ function getUserInput(){
    userLength = parseInt(prompt('Enter a number between 8 and 128 for your password length'))
   if (isNaN(userLength) === true) {
     alert('Please provide a number');
-    return;
+   return
   }
   else if(userLength < 8){
     alert('Please select a number that is between 8 and 128');
@@ -43,6 +43,10 @@ function getUserInput(){
   else if (userLength > 128){
     alert('Please select a number that between 8 and 128');
     return;
+  }
+  else{
+    chooseCharacterTypes();
+    return
   }
 }
 
@@ -82,7 +86,6 @@ function getRandom(arr){
 // Generates the Password
 function generatePassword(){
   getUserInput();
-  chooseCharacterTypes();
   for (var i = 0 + result.length; i < userLength; i++) {
     result.push(getRandom(userSelectedCharacters))
   }
